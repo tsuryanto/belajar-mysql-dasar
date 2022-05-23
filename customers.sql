@@ -19,3 +19,9 @@ ALTER TABLE customers
 ADD CONSTRAINT email_unique UNIQUE (email);
 
 DESC customers;
+
+INSERT into customers(email, first_name, last_name)
+VALUES('tsuryanto16@gmail.com', 'Taufiq', 'Suryanto');
+
+INSERT into customers(email, first_name, last_name)
+VALUES('customersetia@gmail.com', 'Customer', 'Setia');
