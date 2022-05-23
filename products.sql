@@ -125,4 +125,21 @@ SELECT * FROM products;
 INSERT INTO products(id, name, price, quantity)
 VALUES	('X0001', 'X Satu', 25000, 200),
 		('X0002', 'X Dua', 10000, 300),
-        ('X0003', 'X Tiga', 15000, 500);
+        ('X0003', 'X Tiga', 15000, 500);        
+
+-- Sub Query di WHERE
+-- Contoh Mencari products yang harganya diatas rata-rata harga products
+SELECT * FROM products
+WHERE price > (SELECT AVG(price) from products); 
+
+UPDATE products
+SET price = 1000000
+WHERE id = 'X0003';
+
+-- Sub Query di FROM
+-- Menampilkan harga termahal dari product yang memiliki kategori
+SELECT MAX(price) FROM products;
+
+SELECT products.id, products.name, price
+FROM categories 
+JOIN products ON (products.id_category = categories.id);
