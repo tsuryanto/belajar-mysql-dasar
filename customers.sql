@@ -25,3 +25,5 @@ VALUES('tsuryanto16@gmail.com', 'Taufiq', 'Suryanto');
 
 INSERT into customers(email, first_name, last_name)
 VALUES('customersetia@gmail.com', 'Customer', 'Setia');
+
+SELECT * FROM customers;
