@@ -57,3 +57,26 @@ SELECT DISTINCT customers.email
 FROM customers 
 LEFT JOIN guestbooks ON (customers.email = guestbooks.email)
 WHERE guestbooks.email IS NULL;
+
+-- TRANSACTION
+-- Hanya bisa dilakukan operasi DML , yaitu syntax untuk mengolah data
+-- Operasi DDL (syntax untuk mengubah struktur tabel) tidak bisa digunakan di transaction
+
+START TRANSACTION;
+INSERT INTO guestbooks (email, title, content)
+VALUES	('contoh@gmail.com', 'Contoh', 'Contoh'),
+		('contoh1@gmail.com', 'Contoh', 'Contoh'),
+        ('contoh2@gmail.com', 'Contoh', 'Contoh');
+SELECT * FROM guestbooks;
+-- Sampai sini data berhasil masuk ,
+-- namun jika diakses dari user/aplikasi lain, data belum ada karena transaction belum di commit
+COMMIT; 
+-- Setelah di commit, data akan fully tersimpan dan bisa diakses oleh aplikasi/user lain
+-- untuk membatalkan aksi , jangan di commit, tapi menggunakan perintah ROLLBACK;
+
+START TRANSACTION;
+DELETE FROM guestbooks WHERE id > 1; -- Data dihapus , tapi belum permanen
+SELECT * FROM guestbooks;
+ROLLBACK; -- Data terhapus dikembalikan
+
+SELECT * FROM guestbooks;
