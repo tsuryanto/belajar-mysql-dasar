@@ -143,3 +143,10 @@ SELECT MAX(price) FROM products;
 SELECT products.id, products.name, price
 FROM categories 
 JOIN products ON (products.id_category = categories.id);
+
+-- SUb Query nya 
+SELECT MAX(cp.price) FROM (
+	SELECT products.id, products.name, price
+	FROM categories 
+	JOIN products ON (products.id_category = categories.id) 
+) AS cp;
