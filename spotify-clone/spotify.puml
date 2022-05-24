@@ -1,0 +1,116 @@
+@startuml Spotify Clone Database Design
+
+entity Artist{
+    * id : VARCHAR
+    __
+    * name : VARCHAR
+    instagram : VARCHAR
+    facebook : VARCHAR    
+    twitter : VARCHAR    
+    wikipedia : VARCHAR    
+    bio : TEXT
+}
+
+entity Album {
+    * id : VARCHAR
+    __
+    * title : VARCHAR
+    * release : YEAR
+    * image : VARCHAR
+}
+
+entity Song {
+    * id : VARCHAR
+    __
+    * album_id : VARCHAR
+    * title : VARCHAR
+    * duration : INT
+}
+
+entity Playlist {
+    * id : VARCHAR
+    __
+    * name : VARCHAR
+    description : TEXT
+    image : VARCHAR
+    category_id : VARCHAR
+    is_private : BOOLEAN
+    * user_id : VARCHAR
+}
+
+entity PlaylistCategory {
+    * id : VARCHAR
+    __
+    * name : VARCHAR
+    * image : VARCHAR
+    * icon : VARCHAR
+}
+
+entity Podcast {
+    * id : VARCHAR
+    __
+    * name : VARCHAR
+    about : TEXT
+    image : VARCHAR
+    category_id : VARCHAR
+    is_private : BOOLEAN
+    * user_id : VARCHAR
+}
+
+entity PodcastCategory {
+    * id : VARCHAR
+    __ 
+    * name : VARCHAR
+    * image : VARCHAR
+    * icon : VARCHAR
+}
+
+entity Episode {
+    * id : VARCHAR
+    __
+    * title : VARCHAR
+    description : TEXT
+    * published_at : DATE    
+    * duration : INT
+    * podcast_id : VARCHAR
+}
+
+entity User {
+    * id : VARCHAR 
+    __
+    * email : VARCHAR
+    * username : VARCHAR
+    * password : VARCHAR
+    * name : VARCHAR
+    birthday : DATE
+}
+
+entity Concert {
+    * id : VARCHAR
+    __
+    * location : VARCHAR
+    * event_at : DATETIME
+    * url : VARCHAR
+    lon : double
+    lat : double    
+}
+
+Artist }|--|{ Album : Has 
+Album ||--|{ Song : Contains
+Artist }|--|{ Song : Sing
+
+User ||--o{ Playlist : Create
+PlaylistCategory |o--|{ Playlist : Contains
+Playlist }o--o{ Song : Contains
+
+User ||--o{ Podcast : Create
+PodcastCategory |o--|{ Podcast : Contains
+Podcast ||--o{ Episode : Contains
+
+Artist }|--o{ Concert : Perform
+User }o--o{ Artist : Follow
+User }o--o{ Song : Liked Song
+User }o--o{ Playlist : Liked Playlist
+
+
+@enduml
